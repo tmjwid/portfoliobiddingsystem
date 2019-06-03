@@ -1,0 +1,149 @@
+@model BiddingSystem.Models.Account.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<partial name="../Partials/_Message" model="@Model"/>
+
+<div class="row">
+  <h1 class="col-xs-12 col-sm-8">Welcome, @Model.User.Company.CompanyName</h1>
+@if (Model.User.Company.CompanyFunction != null && Model.User.Company.CompanyFunction.Name == "Buyer")
+{
+  <div class="col-sm-4">
+    <a asp-controller="product" asp-action="create" class="btn btn-primary float-right">Create product</a>
+    <!-- <a asp-controller="Account" asp-action="Edit" class="btn btn-primary">Edit account details</a> -->
+  </div>
+}
+
+</div>
+<div class="update-section">
+  <h4>Notifications</h4>
+  <div class="product-updates">
+    <div class="product-update table-responsive">
+      @if (Model.Notifications.Any())
+      {
+        <table class="col-xs-12 table table-striped table-inverse">
+          <thead class="thead-inverse">
+          <tr>
+            <!-- <th class="col-xs-12 col-sm-1">Job ref</th> -->
+            <!-- <th class="col-xs-12 col-sm-2">Due date</th> -->
+            <th class="col-xs-12 col-sm-9">Information</th>
+            <th class="col-xs-12 col-sm-3">Acknowledged</th>
+          </tr>
+          </thead>
+          <tbody>
+            @foreach (var notification in Model.Notifications)
+            {
+              <tr class="table-primary">
+
+                <!-- <td class="col-sm-1">@notification.DueDate</td> -->
+                <td class="col">@notification.Information</td>
+                <td class="col">
+                  <a asp-action="read" asp-controller="notification" asp-route-id="@notification.ID" class="btn btn-primary">Mark as read</a>
+                </td>
+              </tr>              
+            }
+            <!-- <tr class="table-warning">
+              <td scope="col-sm-1">#0000001</td>
+              <td class="col-sm-1">3 days</td>
+              <td class="col-sm-9">Fav Customer has added 3 documents for you to view</td>
+              <td class="col-sm-3">
+                <button class="btn btn-primary">Mark as read</button>
+              </td>
+            </tr>
+            <tr class="table-danger">
+              <td scope="col-xs-12 col-sm-1">#0000002</td>
+              <td class="col-xs-12 col-sm-1">Over due 5 days</td>
+              <td class="col-xs-12 col-sm-9">Bad Customer needs to review documents</td>
+              <td class="col-xs-12 col-sm-3">
+                <button class="btn btn-primary">Mark as read</button>
+              </td>
+            </tr> -->
+          </tbody>
+      </table>
+      }else{
+        <p>You have no notifications</p>
+      }
+
+    </div>
+  </div>
+</div>
+@if (Model.User.Company.CompanyFunction != null && Model.User.Company.CompanyFunction.Name == "Buyer")
+{
+  <h4>My products</h4>
+
+    <div class="my-products-section table-responsive">
+    @if (Model.User.Company.Products != null && Model.User.Company.Products.Any())
+    {
+      <table class="col-xs-12 table table-striped table-inverse">
+                      <thead class="thead-inverse">
+                        <tr>
+                          <th class="col-xs-12 col-sm-2">Title</th>
+                          <th class="col-xs-12 col-sm-1">Job reference</th>
+                          <th class="col-xs-12 col-sm-2">Due date</th>                      
+                          <th class="col-xs-12 col-sm-9">Description</th>                
+                          <th class="col-xs-12 col-sm-1">View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.User.Company.Products)
+                            {
+                              <tr>
+                                <td class="col-sm-1">@item.Title</td>
+                                <td class="col-sm-1">@item.ReferenceForView</td>
+                                <td class="col-sm-1">@item.EndDate.ToShortDateString()</td>
+                                <td class="col-sm-9">@Html.Raw(item.Description)</td>
+                                <td class="col-sm-3">
+                                  <a class="btn btn-primary" asp-controller="product" asp-action="view" asp-route-productid="@item.ID">
+                                    View Product
+                                  </a>
+                                </td>
+                              </tr>
+                              <!-- <br> -->
+                            }
+                        </tbody>
+                    </table>
+    }else{
+      <span>You have no outstanding products</span>
+    }
+
+  </div>
+}
+
+<h4>New products</h4>
+
+<div class="new-products-section">
+  <div class="new-products">
+    <div class="new-product table-responsive">
+      <table class="col-xs-12 table table-striped table-inverse">
+        <thead class="thead-inverse">
+          <tr>
+            <th class="col-xs-12 col-sm-2">Title</th>
+            <th class="col-xs-12 col-sm-1">Product reference</th>
+            <th class="col-xs-12 col-sm-2">Due date</th>                      
+            <th class="col-xs-12 col-sm-9">Description</th>                
+            <th class="col-xs-12 col-sm-1">View</th>
+          </tr>
+          </thead>
+          <tbody>
+              @foreach (var item in Model.NewProducts)
+              {
+                <tr>
+                  <td class="col-sm-1">@item.Title</td>
+                  <td class="col-sm-1">@item.ReferenceForView</td>
+                  <td class="col-sm-1">@item.EndDate.ToShortDateString()</td>
+                  <td class="col-sm-9">@Html.Raw(item.Description)</td>
+                  <td class="col-sm-3">
+                    <a class="btn btn-primary" asp-controller="product" asp-action="view" asp-route-productid="@item.ID">
+                      View Product
+                    </a>
+                  </td>
+                </tr>
+                <!-- <br> -->
+              }
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

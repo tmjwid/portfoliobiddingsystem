@@ -1,0 +1,41 @@
+@model BiddingSystem.Models.Account.ContactModel
+@{
+    ViewData["Title"] = "_Contact";
+}
+<h4>Contact information</h4>
+<div class="row">
+    <div class="col-md-6 form-group">
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 form-group">
+        <label asp-for="MiddleName">Middle Name</label>
+        <input asp-for="MiddleName" class="form-control" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+</div>    
+<div class="row">
+    <div class="col-md-6 form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input  asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 form-group">
+        <label asp-for="JobTitle">Job Title</label>
+        <input asp-for="JobTitle" class="form-control" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+</div>    
+<div class="row">
+    <div class="col-md-6 form-group">
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input data-val-rule="" asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 form-group">
+        <label asp-for="SecondaryPhoneNumber">Secondary Phone Number</label>
+        <input asp-for="SecondaryPhoneNumber" class="form-control" />
+        <span asp-validation-for="SecondaryPhoneNumber" class="text-danger"></span>
+    </div>
+</div>

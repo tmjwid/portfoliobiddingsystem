@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\BiddingSystem.Services.Contracts\BiddingSystem.Services.Contracts.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Models\BiddingSystem.Models.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Repository.Contracts\BiddingSystem.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Common\BiddingSystem.Common.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Common.Contracts\BiddingSystem.Common.Contracts.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Entities\BiddingSystem.Entities.csproj" />
+    <ProjectReference Include="..\BiddingSystem.DTOMapper.Contracts\BiddingSystem.DTOMapper.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+</Project>

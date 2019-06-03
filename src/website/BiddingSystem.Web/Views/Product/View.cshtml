@@ -1,0 +1,113 @@
+@model BiddingSystem.Models.Product.ViewModels.ProductViewViewModel
+@{
+    ViewData["Title"] = "View";
+} 
+
+<partial name="../Partials/_Message" model="@Model"/>
+
+<div class="row justify-content-end">
+    <div class="col-xs-12 col-sm-6">    
+        <h1 class="display-3">@Model.Product.Title</h1>
+        <h4>Reference: @Model.Product.ReferenceForView</h4>
+        <p>@Html.Raw(Model.Product.Description)</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 text-right">  
+        @if (@Model.Product.Editable)
+        {
+            <!-- <a class="rowfloat-right btn btn-primary" asp-action="edit" asp-controller="product" asp-route-id="@Model.Product.ID">Edit Product</a>         -->
+            <a class="rowfloat-right btn btn-primary" asp-action="cancel" asp-controller="product" asp-route-productid="@Model.Product.ID">Cancel Product</a>        
+            <br>
+        }
+        <span class="col-xs-12">Date posted: @Model.Product.DateCreated.Date.ToShortDateString()</span>
+        <br>
+        <span class="col-xs-12">End date: @Model.Product.EndDate.Date.ToShortDateString()</span>
+        <br>
+        <br>
+
+        @if (!Model.Product.Editable && !Model.Product.Bids.Any(e => e.Accepted))
+        {
+            <div class="row justify-content-end">
+                <div class="float-right">
+                    <h6>Bid on product</h6>
+                    <form asp-action="Bid" asp-controller="product" method="post" >
+                        <input type="hidden" asp-for="Bid.ProductID" />
+                        <div class="form-group">
+                            <label asp-for="Bid.Price"></label>
+                            <input asp-for="Bid.Price" class="form-control" />
+                            <span asp-validation-for="Bid.Price" class="text-danger"></span>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit bid</button>                    
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+    @if (@Model.Product.Editable)
+    {
+        <a class="float-right btn btn-primary" asp-action="managedocuments" asp-controller="product" asp-route-id="@Model.Product.ID">Manage Documents</a>
+    }
+ </div>
+
+<br>
+<div class="col-xs-12">
+    <h4>@(!Model.Product.Editable ? Html.Raw("Your bids") : Html.Raw("Current Bids"))</h4>
+    @if (Model.Product.Bids.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <!-- <th>Job Type</th>
+                    <th>Reference</th>      
+                    <th>Job Description</th> -->
+                    @if (Model.Product.Editable)
+                    {
+                        <th>Company</th>
+                        <th>Accept/Decline Bid</th>
+                    }else
+                    {
+                        <th>Cancel bid</th>                        
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Product.Bids)
+                {
+                <tr>
+                    <td>@item.Price</td>
+                    @if (item.Accepted || item.Declined)
+                    {
+                        <td>
+                            <span>Bid @(item.Declined ? Html.Raw("declined") : (item.Accepted ? Html.Raw("Accepted") : Html.Raw("")))</span>
+                        </td> 
+                    }
+                    else
+                    {
+                        @if (Model.Product.Editable)
+                        {
+                            <td>@item.Company.CompanyName</td>
+                            <td>
+                                <a class="btn btn-primary" asp-controller="bid" asp-action="acceptbid" asp-route-bidid="@item.ID">
+                                    Accept Bid
+                                </a>
+                                <a class="btn btn-primary" asp-controller="bid" asp-action="declinebid" asp-route-bidid="@item.ID">
+                                    Decline Bid
+                                </a>
+                            </td>                      
+                        }else
+                        {
+                            <td>
+                                <a class="btn btn-primary" asp-controller="bid" asp-action="cancel" asp-route-productid="@item.ProductID" asp-route-bidid="@item.ID">
+                                    Cancel Bid
+                                </a>
+                            </td>
+                        }
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    }else{
+        <p>@(Model.Product.Editable ? "There have been no bids placed on this product." : "You've not placed a bid on this product yet")</p> 
+    }
+</div>

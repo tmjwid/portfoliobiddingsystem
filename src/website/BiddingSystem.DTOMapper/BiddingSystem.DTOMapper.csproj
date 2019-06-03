@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\BiddingSystem.Entities\BiddingSystem.Entities.csproj" />
+    <ProjectReference Include="..\BiddingSystem.Models\BiddingSystem.Models.csproj" />
+    <ProjectReference Include="..\BiddingSystem.DTOMapper.Contracts\BiddingSystem.DTOMapper.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

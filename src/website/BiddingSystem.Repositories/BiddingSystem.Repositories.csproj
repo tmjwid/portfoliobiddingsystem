@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.9"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0"/>
+    <PackageReference Include="Npgsql" Version="4.0.4"/>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0"/>
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BiddingSystem.Repository.Contracts\BiddingSystem.Repository.Contracts.csproj"/>
+    <ProjectReference Include="..\BiddingSystem.Entities\BiddingSystem.Entities.csproj"/>
+    <ProjectReference Include="..\BiddingSystem.Models\BiddingSystem.Models.csproj"/>
+    <ProjectReference Include="..\BiddingSystem.Common\BiddingSystem.Common.csproj"/>
+  </ItemGroup>
+</Project>

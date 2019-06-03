@@ -1,0 +1,31 @@
+@model BiddingSystem.Models.Account.RegistrationModel
+
+<!-- <h2>Step 2 - Company Information</h2> -->
+
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 33%;"
+        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1 - User & Company information</div>
+            <div class="progress-bar bg-success" role="progressbar" style="width: 34%;"
+        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 2 - Contact information</div>    
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 33%;"
+        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Step 3 - Address information</div>    
+        <!-- <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%;"
+        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 4 - Confirmation</div> -->
+</div>
+
+<form method="post" asp-controller="Registration" asp-action="Step3">
+  <br>
+@Model.Message
+    <h4>Address information</h4>
+    <partial name="../Partials/_Address.cshtml" for="@Model.MainAddress" />
+
+    <!-- <h4>Primary company contact information</h4>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" asp-for="Company.UseUserContactDetails">
+        Use account contact information
+      </label>
+    </div>
+    <partial name="../Partials/_Contact.cshtml" for="Contact" /> -->
+    <button class="btn btn-sm btn-primary" input="submit">Complete Registration</button>
+</form>

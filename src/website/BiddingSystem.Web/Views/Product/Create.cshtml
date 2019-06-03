@@ -1,0 +1,41 @@
+@model BiddingSystem.Models.Product.ProductModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-controller="Product" asp-action="Create">
+    <div class="row">
+        <div class="form-group col-xs-12 col-sm-6">
+            <label asp-for="Title"></label>
+            <!-- <input asp-for="Discription" class="form-control"> -->
+            <input class="form-control" asp-for="Title"></textarea>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div> 
+        <div class="form-group col-xs-12 col-sm-6">
+            <label asp-for="EndDate">End date of product</label>
+            <input asp-for="EndDate" data-date-format='dd/mm/yyyy' data-date-start-date="+0d" data-provide="datepicker" value="@DateTime.Now.Date.ToShortDateString()"  class="form-control form_datetime" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+    </div> 
+    <div class="form-group ">
+        <label asp-for="Description"></label>
+        <div id="snow-container"></div>
+        <textarea id="Description" hidden class="form-control" asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>   
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/quill.bubble.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.standalone.min.css" />
+    <link rel="stylesheet" href="~/css/quill.core.css" />
+    <link rel="stylesheet" href="~/css/quill.snow.css" />
+}
+
+@section Scripts{
+    <script src="~/js/quill.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/product.js"></script>
+}
+

@@ -1,0 +1,19 @@
+﻿@model BiddingSystem.Models.Account.UserModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Welcome to BiddingSystem</h1>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <h3>Congratuations, you've been invited to product on BiddingSystem... hopefully the first of many.</h3>
+        <p>it doesn't look like we've met before - so please register or if you alrady have an account, just login.</p>
+        <a class="btn btn-primary" asp-controller="registration" asp-action="step1">Register</a>
+        <a class="btn btn-primary" asp-controller="account" asp-action="login">Login</a>
+    }else{
+        <p>You are luckily logged into BiddingSystem, either log out or go to your dashboard</p>
+        <a class="btn btn-primary" asp-controller="account" asp-action="dashboard">Dashboard</a>
+        <a class="btn btn-primary" asp-controller="account" asp-action="logout">Logout</a>
+    }
+</div>
