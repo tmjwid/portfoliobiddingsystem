@@ -3,3 +3,4 @@
 *    text=auto
 
 *.cs text diff=csharp
+/src/website/BiddingSystem.Web/wwwroot/* linguist-vendored
